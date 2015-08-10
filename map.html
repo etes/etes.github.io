@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=7,IE=9">
+<meta name="view-port" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Norway Map</title>
+
+<link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+<script src="//cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+<script src="//cdn.jsdelivr.net/leaflet.esri/1.0.0/esri-leaflet.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.6/proj4.js"></script>
+<script src="//cdn.rawgit.com/kartena/Proj4Leaflet/0.7.0/src/proj4leaflet.js"></script>
+
+<!-- LEAFLET HASH: awesome plugins @ https://www.mapbox.com/mapbox.js/plugins -->
+<script src="//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-hash/v0.2.1/leaflet-hash.js"></script>
+
+<style>
+	html, body {
+		height: 100%;
+		width: 100%;
+		margin: 0px;
+	}
+</style>
+
+</head>
+<body>
+<div id="map" style="height:100%; width:100%"></div>
+<script>
+	// get projection definition from http://spatialreference.org/ref/epsg/25833/proj4/
+	var crs = new L.Proj.CRS('EPSG:25833', '+proj=utm +zone=33 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs', {
+			//transformation: new L.Transformation(1, 2500000.0, -1, 904598.0),
+			origin: [-2500000, 9045984],
+			resolutions: [
+			21674.7100160867,
+			10837.35500804335,
+			5418.677504021675,
+			2709.3387520108377,
+			1354.6693760054188,
+			677.3346880027094,
+			338.6673440013547,
+			169.33367200067735,
+			84.66683600033868,
+			42.33341800016934,
+			21.16670900008467,
+			10.583354500042335,
+			5.291677250021167,
+			2.6458386250105836,
+			1.3229193125052918,
+			0.6614596562526459,
+			0.33072982812632296,
+			0.16536491406316148]
+		});
+
+	var map = L.map('map', {
+			crs: crs,
+			center: [59.21, 10.94],
+			zoom: 10
+			});
+	L.esri.tiledMapLayer({
+			url: '//services.geodataonline.no/arcgis/rest/services/Geocache_UTM33_EUREF89/GeocacheGraatone/MapServer',
+			maxZoom: 17,
+			minZoom: 0,
+			continuousWorld: true
+		}).addTo(map);
+	var hash = new L.hash(map);
+</script>
+</body>
+</html>
