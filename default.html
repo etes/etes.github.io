@@ -136,19 +136,19 @@
 
         // Create a feature layer to get feature service
         function addClusterLayer() {
-            clusterLayer = new ClusterFeatureLayer({
-                "url": "http://kart.fredrikstad.kommune.no/arcgis/rest/services/Prosjekter/Kulturnatt2015_arrangement/FeatureServer/1",
-                "distance": 20,
-                "id": "clusters",
-                "labelColor": "#fff",
-                "resolution": map.extent.getWidth() / map.width,
-                "singleTemplate": infoTemplate,
-                "useDefaultSymbol": false,
-                "zoomOnClick": true,
-                "showSingles": true,
-                "objectIdField": "OBJECTID",
-                outFields: ["NAVN", "STED", "TID", "KATEGORI", "ARRANGOR", "LINK"]
-            });
+          clusterLayer = new ClusterFeatureLayer({
+              "url": "http://services.arcgis.com/oKgs2tbjK6zwTdvi/arcgis/rest/services/Major_World_Cities/FeatureServer/0",
+              "distance": 75,
+              "id": "clusters",
+              "labelColor": "#fff",
+              "resolution": map.extent.getWidth() / map.width,
+              "singleTemplate": infoTemplate,
+              "useDefaultSymbol": false,
+              "zoomOnClick": true,
+              "showSingles": true,
+              "objectIdField": "FID",
+              outFields: ["NAME", "COUNTRY", "POPULATION", "CAPITAL"]
+          });
 
             map.addLayer(clusterLayer);
         }
